@@ -85,11 +85,13 @@ function Links() {
 
 function Anchors(event) {
   const targetAttr = this.getAttribute('target');
+  
+  // If the link is supposed to open in a new tab, don't override default behavior
+  if (targetAttr === '_blank') return;
 
-  if (!targetAttr || targetAttr === '_self') {
-    event.preventDefault();
-    window.location.href = this.href;
-  }
+  // Otherwise, prevent default and manually navigate
+  event.preventDefault();
+  window.location.href = this.href;
 }
 
 window.onload = Links;
