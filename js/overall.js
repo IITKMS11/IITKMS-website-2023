@@ -84,9 +84,12 @@ function Links() {
 }
 
 function Anchors(event) {
-  event.preventDefault(); // Prevent the default anchor click behavior
-  // Set new window location using the anchor href that triggers this function.
-  window.location.href = this.href;
+  const targetAttr = this.getAttribute('target');
+
+  if (!targetAttr || targetAttr === '_self') {
+    event.preventDefault();
+    window.location.href = this.href;
+  }
 }
 
 window.onload = Links;
