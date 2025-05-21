@@ -73,32 +73,4 @@ window.onmousemove = (e) => {
 
 PageTransitions();
 
-function Links() {
-  const anchors = document.querySelectorAll('a[href]');
-
-  anchors.forEach(anchor => {
-    // Only attach if it does NOT have target=_blank
-    if (!anchor.getAttribute('target') || anchor.getAttribute('target') === '_self') {
-      anchor.addEventListener('click', Anchors, false);
-    }
-  });
-}
-
-function Anchors(event) {
-  const anchor = this;
-
-  // Only override behavior for internal/same-tab links
-  const target = anchor.getAttribute('target');
-
-  // Let _blank links behave naturally (open in new tab)
-  if (target && target === "_blank") {
-    // Let browser handle it; do nothing
-    return;
-  }
-
-  // Otherwise, override the default and navigate manually
-  event.preventDefault();
-  window.location.href = anchor.href;
-}
-
 window.onload = Links;
