@@ -74,24 +74,31 @@ window.onmousemove = (e) => {
 PageTransitions();
 
 function Links() {
-  // Get all Anchor elements
-  var a = document.getElementsByTagName('a');
-  // Loop through each anchor element found.
-  for (var i = 0; i < a.length; i++) {
-    // Set onclick event for the anchor element
-    a[i].addEventListener('click', Anchors, false);
-  }
+  const anchors = document.querySelectorAll('a[href]');
+
+  anchors.forEach(anchor => {
+    // Only attach if it does NOT have target=_blank
+    if (!anchor.getAttribute('target') || anchor.getAttribute('target') === '_self') {
+      anchor.addEventListener('click', Anchors, false);
+    }
+  });
 }
 
 function Anchors(event) {
-  const targetAttr = this.getAttribute('target');
-  
-  // If the link is supposed to open in a new tab, don't override default behavior
-  if (targetAttr === '_blank') return;
+  const anchor = this;
 
-  // Otherwise, prevent default and manually navigate
+  // Only override behavior for internal/same-tab links
+  const target = anchor.getAttribute('target');
+
+  // Let _blank links behave naturally (open in new tab)
+  if (target && target === "_blank") {
+    // Let browser handle it; do nothing
+    return;
+  }
+
+  // Otherwise, override the default and navigate manually
   event.preventDefault();
-  window.location.href = this.href;
+  window.location.href = anchor.href;
 }
 
 window.onload = Links;
