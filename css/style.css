@@ -741,6 +741,26 @@ button {
     padding-top: 80px;
 }
 
+#fh5co-couple-story {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+.team-members {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.section-heading {
+  margin-bottom: 10px; /* Adjust this if needed */
+}
+
+.container {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+
 /* contact section end */
 
 /* footer section start */
